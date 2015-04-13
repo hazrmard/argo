@@ -130,7 +130,7 @@ var choropleth = function(events) {						//tally events by state for choropleth
 };
 
 var getResults = function(current_page) {					//recursively obtain results from multiple pages
-	d3.json(URL, function(results){
+	d3.json(URL + "&page=" + current_page, function(results){
 		if (current_page == 1) {							//set recursion limits by storing number of pages in result
 			total_pages = results.pagination.page_count;
 			total_events = results.pagination.object_count;
@@ -141,7 +141,6 @@ var getResults = function(current_page) {					//recursively obtain results from 
 		choropleth(results.events);						//add page results to tally of events by state
 		current_page++;										//increment to next page
 		updateStuff(current_page);
-		URL += "&page=" + current_page;						//update request url
 		getResults(current_page);							//let it rip
 	});
 }
