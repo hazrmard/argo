@@ -24,7 +24,7 @@
 	}
 
 	#tooltip p {
-        margin: 0;
+        margin: auto;
         font-family: sans-serif;
         font-size: 16px;
         line-height: 20px;
@@ -34,10 +34,11 @@
 </head>
 
 <body>
-<div style="position:relative">
-	<p style="position:fixed; top:0; width:100%;text-align:center"><strong>A choropleth of performance events registered on Eventbrite this week by state.</strong></a></p>
+<div style="position:relative; text-align="center">
+	<p style="position:fixed; top:0; width:100%;text-align:center"><strong>A choropleth of performance events registered on Eventbrite this week by state.</strong></p>
+	<p style="position:fixed; top:5%; width:100%;text-align:center"><a href="http://github.com/hazrmard/eventbrite">Source</a></p>
 </div>
-	<script src="https://www.googledrive.com/host/0B_Qh0MNg09l0cURPdlRxZW1xX3c"></script>
+	<script src="eventbrite.js"></script>
 	<div id="tooltip" class="hidden">
 		<p><strong>This Week:</strong></p>
         <p><span id="value">100</span></p>

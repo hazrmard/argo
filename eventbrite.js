@@ -1,7 +1,7 @@
 console.log('eventbrite.js loaded');
 
 var token = "FHO43SJ3VXJC6S3P2TRR";						//token for API access
-var URL = "https://www.eventbriteapi.com/v3/events/search/?format=json&start_date.keyword=this_week&categories=103%2C104%2C105&venue.country=US&token=" + token;	//may be scaled for dynamic generation based on user input
+var URL = "https://www.eventbriteapi.com/v3/events/search/?format=json&start_date.keyword=this_week&categories=103%2C104%2C105&venue.country=US&token=" + token + "&expand=venue";	//may be scaled for dynamic generation based on user input
 var MAPLOC = "https://www.googledrive.com/host/0B_Qh0MNg09l0QUdXbkMySW1zYms/"		//location of map shape file
 
 var state_nums = {};									//events per state
@@ -114,16 +114,22 @@ var drawAndInteract = function(json) {					//draw map and add mouseover interact
 
 var choropleth = function(events) {						//tally events by state for choropleth
 	var i = 0;
+	console.log(events);
 	for (i;i<events.length;i++) {							//iterate over event entries
 		//console.log(events[i]);
-		if (events[i].venue.address.region in state_nums) {	//add to state-wise count of events
-			state_nums[events[i].venue.address.region] += 1;
-			if (state_nums[events[i].venue.address.region] > curr_max_events) {
-				curr_max_events = state_nums[events[i].venue.address.region];		//maximum events any state has
+		try {
+			if (events[i].venue.address.region in state_nums) {	//add to state-wise count of events
+				state_nums[events[i].venue.address.region] += 1;
+				if (state_nums[events[i].venue.address.region] > curr_max_events) {
+					curr_max_events = state_nums[events[i].venue.address.region];		//maximum events any state has
+				}
 			}
+			else {
+				state_nums[events[i].venue.address.region] = 1;
+			};
 		}
-		else {
-			state_nums[events[i].venue.address.region] = 1;
+		catch(err) {
+			//console.log(err);
 		}
 	}
 	//console.log(state_nums);
@@ -138,6 +144,7 @@ var getResults = function(current_page) {					//recursively obtain results from 
 		else if (current_page == total_pages) {				//recursion end condition
 			return;
 		}
+		console.log(results);
 		choropleth(results.events);						//add page results to tally of events by state
 		current_page++;										//increment to next page
 		updateStuff(current_page);
