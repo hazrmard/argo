@@ -4,6 +4,13 @@
 </head>
 
 <body>
-    <p>Here I am, this is me. Blah de blah de blah.</p>
+    {% for post in posts %}
+        <div>
+            <h3>{{post.title}}</h3>
+            <p>published: {{post.published_date}}</p>
+            </br>
+            <p>{{post.text | linebreaks}}</p>
+        </div>
+    {% endfor %}
 </body>
 </html>
