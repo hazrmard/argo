@@ -1,31 +1,35 @@
-﻿<html>
-<head>
-    <title>DJANGOOOO!</title>
-    {% load custom_filters %}
-</head>
+﻿{% extends 'search/base.html' %}
+{% load custom_filters %}
 
-<body>
-    <h2>Query</h2>
-    <form method="GET">
-        {{ form.as_table }}
-        <button type="submit">Search</button>
-    </form>
-    
-    {% if results.events %}
-    
-    <div>
-            {% for event in results.events %}
-                <p>{{ event.name.text}}</p>
+{% block content %}
+    <div class="container form-group">
+        <h2>Query</h2>
+        <form method="GET">
+            {% for field in form %}
+                {{ field.label_tag }}
+                {{ field }}
             {% endfor %}
+            <button type="submit">Search</button>
+        </form>
+    </div>
         
-    </div>
-    
-    <div>
-        {% for i in results.pagination.page_count|get_range %}
-            <div style="display: inline"><a href="{{ url|concat_page_query:i}}">{{i}}</a></div>
-        {% endfor %}
-    </div>
-    
+        {% if results.events %}    
+        <div class="results-div container">
+            <table class="table-striped table-bordered table-hover form-group">
+                {% for event in results.events %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><a href={{event.url}} target="_blank">{{ event.name.text}}</a></td>
+                        <td>{{event.start.local}}</td>
+                    </tr>
+                {% endfor %}
+            </table>            
+        </div>
+        
+        <div class="container">
+            {% for i in results.pagination.page_count|get_range %}
+                <div style="display: inline"><a href="{{ url|concat_page_query:i}}">{{i}}</a></div>
+            {% endfor %}
+        </div> 
     {% endif %}
-</body>
-</html>
+{% endblock %}

@@ -14,6 +14,6 @@ class QForm(forms.Form):
         data = self.cleaned_data['categories']
         print('here is cleaned data:')
         print(data)
-        if len(data) > 3:
-            raise forms.ValidationError("You can select at most 3 categories.")
+        if len(data) > 3 or len(data)==0:
+            raise forms.ValidationError("You can select between 1 and 3 categories.")
         return data
