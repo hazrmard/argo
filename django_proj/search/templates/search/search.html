@@ -9,5 +9,13 @@
         {{ form.as_table }}
         <button type="submit">Search</button>
     </form>
+    
+    <div>
+        {% if results.events %}
+            {% for event in results.events %}
+                <p>{{ event.name.text}}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
 </body>
 </html>

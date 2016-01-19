@@ -1,12 +1,19 @@
 ﻿from django import forms
-from .models import Query
+from .helpers import *
 
-class QueryForm(forms.ModelForm):
-
-    class Meta:
-        model = Query
-        fields = ('city', 'region', 'country', 'categories', 'popular',)
 
 class QForm(forms.Form):
+    venue_city = forms.CharField(required=False)
+    venue_region = forms.CharField(required=False)
+    venue_country = forms.CharField(required=False)
+    keywords = forms.CharField(required=False)
     categories = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
-                                         choices=Query().get_categories())
+                                         choices=get_categories(), required=True)
+     
+    def clean_categories(self):
+        data = self.cleaned_data['categories']
+        print('here is cleaned data:')
+        print(data)
+        if len(data) > 3:
+            raise forms.ValidationError("You can select at most 3 categories.")
+        return data
