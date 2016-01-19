@@ -5,3 +5,5 @@ eventbrite for performance related events happening within a week. Each request 
 request, the choropleth is updated. A progress bar on top represents the proportion of results received.
 
 The choropleth has been made interactive by adding mouseover events that include highlighting and labels.
+
+Project live at [iahmed.me/eventbrite](http://iahmed.me/eventbrite).
