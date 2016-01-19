@@ -1,6 +1,7 @@
 ﻿<html>
 <head>
     <title>DJANGOOOO!</title>
+    {% load custom_filters %}
 </head>
 
 <body>
@@ -10,12 +11,21 @@
         <button type="submit">Search</button>
     </form>
     
+    {% if results.events %}
+    
     <div>
-        {% if results.events %}
             {% for event in results.events %}
                 <p>{{ event.name.text}}</p>
             {% endfor %}
-        {% endif %}
+        
     </div>
+    
+    <div>
+        {% for i in results.pagination.page_count|get_range %}
+            <div style="display: inline"><a href="{{ url|concat_page_query:i}}">{{i}}</a></div>
+        {% endfor %}
+    </div>
+    
+    {% endif %}
 </body>
 </html>

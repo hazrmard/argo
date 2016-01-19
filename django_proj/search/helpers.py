@@ -13,12 +13,12 @@ def get_categories():
     return options_list
 
 def get_results(query):
-    query_string = '&'.join([x + '=' + query[x] for x in query if query[x]!=''])
+    query_string = '/?' + '&'.join([x + '=' + query[x] for x in query if query[x]!=''])
     query_string = query_string.replace('_', '.')
-    query_string = urllib.parse.quote_plus(query_string, safe='=&')
-    eventURL = baseURL + 'events/search/?token=' + TOKEN + '&' + query_string
-    print('URL is: ' + eventURL)
-    raw_result = requests.get(eventURL)
+    query_string = urllib.parse.quote_plus(query_string, safe='=&/?')
+    print(query_string)
+    eventURL = baseURL + 'events/search' + query_string
+    authURL = eventURL + '&token=' + TOKEN
+    raw_result = requests.get(authURL)
     result = json.loads(raw_result.text)
-    print(len(result['events']))
-    return result
+    return result, query_string
