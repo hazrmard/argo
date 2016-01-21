@@ -10,4 +10,4 @@ Search for events registered on eventbrite.
 * Search through paginated results interactively
 * Open results in Eventbrite.com
 
-App live on [hazrmard.pythonanywhere.com](hazrmard.pythonanywhere.com).
+App live on [hazrmard.pythonanywhere.com](http://hazrmard.pythonanywhere.com).
