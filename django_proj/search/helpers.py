@@ -16,7 +16,7 @@ def get_categories():
 
 def get_results(query):
     query_string = '/?'
-    #print(query)
+    print(query)
     if 'categories' in query:
         query_string += 'categories=' + ','.join(query['categories'])
         query_string += '&'
@@ -30,6 +30,7 @@ def get_results(query):
     raw_result = requests.get(authURL)
     result = json.loads(raw_result.text)
     query_string_pure = re.sub(r'&page=\d+', '', query_string)
+    query_string_pure = re.sub(r'%2C', '&categories=', query_string_pure)
     print('pure url:\t' + query_string_pure)
     return result, query_string_pure
 

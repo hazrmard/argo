@@ -17,3 +17,16 @@ table {
 .dataTables_info {
     display: None;
 }
+
+body {
+    background-color: #FE9A2E;
+}
+
+.container {
+    background-color: #FFFFFF;
+    border-radius: 1em;
+    box-shadow: 7px 7px 27px -6px rgba(0,0,0,1);
+    margin-top: 1em;
+    margin-bottom: 1 em;
+    padding: 1em;
+}
