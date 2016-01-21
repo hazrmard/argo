@@ -7,10 +7,7 @@ def search_page(request):
     results = None
     url = ''
     if request.method == 'GET' and 'categories' in request.GET:
-        #print('printing request.GET:')
-        #print(request.GET)
         qform = QForm(request.GET)
         if qform.is_valid():
-            #print('Form is valid.')
-            results, url = get_results(request.GET)
+            results, url = get_results(dict(request.GET))
     return render(request, 'search/search.html', {'form': qform, 'results': results, 'url': url})

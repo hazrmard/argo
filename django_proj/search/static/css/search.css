@@ -1,1 +1,15 @@
-﻿
+﻿.errors {
+    color: red;
+}
+
+td, th, .pages-div {
+    padding: 1em;
+}
+
+table {
+    margin:auto;
+}
+
+.pages-div {
+    text-align: center;
+}

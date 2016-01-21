@@ -8,3 +8,7 @@ def get_range(num):
 @register.filter
 def concat_page_query(val, arg):
     return str(val) + '&page=' + str(arg)
+
+@register.filter
+def process_date(val):
+    return '\t'.join(val.split('T'))
