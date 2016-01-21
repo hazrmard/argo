@@ -13,3 +13,7 @@ table {
 .pages-div {
     text-align: center;
 }
+
+.dataTables_info {
+    display: None;
+}
