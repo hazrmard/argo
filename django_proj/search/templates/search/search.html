@@ -3,8 +3,10 @@
 {% load bootstrap_tags %}
 
 {% block content %}
-    <div class="container">
-        <h2>Query</h2>
+    <div class="container query-div {% if results.events %} shrink-div {% endif %}">
+        <div class="head-div">
+            <h2>Query</h2>
+        </div>
         <form method="GET" class="form-search">
             {{ form|as_bootstrap }}
             <button class="btn btn-default" type="submit">Search</button>
