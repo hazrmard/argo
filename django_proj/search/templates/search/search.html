@@ -9,6 +9,7 @@
         </div>
         <form method="GET" class="form-search">
             {{ form|as_bootstrap }}
+            <input type="hidden" name="submit_flag" value="pressed" />
             <button class="btn btn-default" type="submit">Search</button>
         </form>
     </div>

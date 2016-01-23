@@ -16,11 +16,10 @@ def get_categories():
 
 def get_results(query):
     query_string = '/?'
-    print(query)
     if 'categories' in query:
         query_string += 'categories=' + ','.join(query['categories'])
         query_string += '&'
-    query_string += '&'.join([x + '=' + query[x][0] for x in query if query[x][0]!='' and x!='categories'])
+    query_string += '&'.join([x + '=' + query[x][0] for x in query if query[x][0]!='' and x!='categories' and x!='submit_flag'])
     query_string = query_string.replace('_', '.')
     if 'page' not in query:
         query_string += '&page=1'
@@ -31,8 +30,15 @@ def get_results(query):
     result = json.loads(raw_result.text)
     query_string_pure = re.sub(r'&page=\d+', '', query_string)
     query_string_pure = re.sub(r'%2C', '&categories=', query_string_pure)
-    print('pure url:\t' + query_string_pure)
+    query_string_pure += '&submit_flag=pressed'
     return result, query_string_pure
 
-def check_names(data):
-        return re.search('\d+', data)
+def validate_names(data):
+    if re.search(r'^(?:[^\W\d_]| )+$', data):
+        return True
+    return False
+
+def is_empty(data):
+    print ('empty function called')
+    return data is None or data.strip() == ''
+        

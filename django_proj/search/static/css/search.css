@@ -6,7 +6,7 @@ table {
     margin:auto;
 }
 
-.pages-div {
+.pages-div, .head-div {
     text-align: center;
 }
 
@@ -27,10 +27,19 @@ body {
     padding: 1em;
 }
 
+.head-div{
+    margin-top: 0px;
+    border-radius: 1em;
+}
+
 .padding-expand {
     transition: padding-bottom 0.2s;
 }
 
+.shrink-div .head-div {
+    cursor: pointer;
+}
+
 .padding-expand:hover {
-    padding-bottom: 3em;
+    padding-bottom: 2em;
 }

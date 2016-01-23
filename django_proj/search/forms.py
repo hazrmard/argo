@@ -14,32 +14,30 @@ class QForm(forms.Form):
      
     def clean_categories(self):
         data = self.cleaned_data['categories']
-        print("Cleaning categories")
-        print(self.cleaned_data['categories'])
         if len(data) > 3 or len(data)==0:
             raise forms.ValidationError("You can select between 1 and 3 categories.")
         return data
     
     def clean_venue_city(self):
-        data = self.cleaned_data['venue_city']
-        if check_names(data):
+        data = self.cleaned_data['venue_city'].strip()
+        if not validate_names(data) and not is_empty(data):
             raise forms.ValidationError("Please enter valid city name.")
         return data
     
     def clean_venue_region(self):
-        data = self.cleaned_data['venue_region']
-        if check_names(data):
+        data = self.cleaned_data['venue_region'].strip()
+        if not validate_names(data) and not is_empty(data):
             raise forms.ValidationError("Please enter valid region name.")
         return data
     
-    def clean_country(self):
-        data = self.cleaned_data['country']
-        if check_names(data):
+    def clean_venue_country(self):
+        data = self.cleaned_data['venue_country'].strip()
+        if not validate_names(data) and not is_empty(data):
             raise forms.ValidationError("Please enter valid country name.")
         return data
     
-    def clean_keywords(self):
-        data = self.cleaned_data['keywords']
-        if check_names(data):
+    def clean_q(self):
+        data = self.cleaned_data['q'].strip()
+        if not validate_names(data) and not is_empty(data):
             raise forms.ValidationError("Please enter valid keywords.")
         return data
