@@ -27,11 +27,6 @@ body {
     padding: 1em;
 }
 
-.head-div{
-    margin-top: 0px;
-    border-radius: 1em;
-}
-
 .padding-expand {
     transition: padding-bottom 0.2s;
 }

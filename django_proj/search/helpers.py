@@ -28,10 +28,7 @@ def get_results(query):
     authURL = eventURL + '&token=' + TOKEN
     raw_result = requests.get(authURL)
     result = json.loads(raw_result.text)
-    query_string_pure = re.sub(r'&page=\d+', '', query_string)
-    query_string_pure = re.sub(r'%2C', '&categories=', query_string_pure)
-    query_string_pure += '&submit_flag=pressed'
-    return result, query_string_pure
+    return result
 
 def validate_names(data):
     if re.search(r'^(?:[^\W\d_]| )+$', data):
