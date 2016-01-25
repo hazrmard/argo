@@ -10,4 +10,11 @@ Search for events registered on eventbrite.
 * Search through paginated results interactively
 * Open results in Eventbrite.com
 
+###Dependencies
+* [django-forms-bootstrap](https://pypi.python.org/pypi/django-forms-bootstrap/) (python)
+* [requests](https://pypi.python.org/pypi/requests) (python)
+* [DataTables](https://www.datatables.net/) (javascript)
+* [jQuery](https://jquery.com/) (javascript)
+* [Bootstrap](http://getbootstrap.com/) (CSS)
+
 App live on [hazrmard.pythonanywhere.com](http://hazrmard.pythonanywhere.com).
