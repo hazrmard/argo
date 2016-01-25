@@ -14,7 +14,28 @@ def get_categories():
     options_list = sorted(options_list, key=lambda tup: tup[1])
     return options_list
 
+
 def get_results(query):
+    query_string = gen_query(query)
+    eventURL = baseURL + 'events/search' + query_string
+    authURL = eventURL + '&token=' + TOKEN
+    raw_result = requests.get(authURL)
+    result = json.loads(raw_result.text)
+    return result
+
+
+def validate_names(data):
+    if re.search(r'^(?:[^\W\d_]| )+$', data):
+        return True
+    return False
+
+
+def is_empty(data):
+    print ('empty function called')
+    return data is None or data.strip() == ''
+
+
+def gen_query(query):
     query_string = '/?'
     if 'categories' in query:
         query_string += 'categories=' + ','.join(query['categories'])
@@ -24,18 +45,5 @@ def get_results(query):
     if 'page' not in query:
         query_string += '&page=1'
     query_string = urllib.parse.quote_plus(query_string, safe='=&/?')
-    eventURL = baseURL + 'events/search' + query_string
-    authURL = eventURL + '&token=' + TOKEN
-    raw_result = requests.get(authURL)
-    result = json.loads(raw_result.text)
-    return result
-
-def validate_names(data):
-    if re.search(r'^(?:[^\W\d_]| )+$', data):
-        return True
-    return False
-
-def is_empty(data):
-    print ('empty function called')
-    return data is None or data.strip() == ''
-        
+    return query_string
+    
