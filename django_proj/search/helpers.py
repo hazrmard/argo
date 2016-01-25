@@ -7,6 +7,7 @@ TOKEN = 'FHO43SJ3VXJC6S3P2TRR'
 baseURL = 'https://www.eventbriteapi.com/v3/'
 
 def get_categories():
+    """get a sorted list of categiries to search on"""
     catURL = baseURL + 'categories/?token=' + TOKEN
     raw_result = requests.get(catURL)
     result = json.loads(raw_result.text)
@@ -16,6 +17,7 @@ def get_categories():
 
 
 def get_results(query):
+    """get json parsed results"""
     query_string = gen_query(query)
     eventURL = baseURL + 'events/search' + query_string
     authURL = eventURL + '&token=' + TOKEN
@@ -25,17 +27,20 @@ def get_results(query):
 
 
 def validate_names(data):
+    """check for non-alphanumeric characters that are not spaces"""
     if re.search(r'^(?:[^\W\d_]| )+$', data):
         return True
     return False
 
 
 def is_empty(data):
+    """check for empty/purely whitespace data"""
     print ('empty function called')
     return data is None or data.strip() == ''
 
 
 def gen_query(query):
+    """generate a url friendly query string based on a QueryDict/Dict"""
     query_string = '/?'
     if 'categories' in query:
         query_string += 'categories=' + ','.join(query['categories'])

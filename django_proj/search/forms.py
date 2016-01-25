@@ -4,6 +4,8 @@ import re
 
 
 class QForm(forms.Form):
+    """Query form. More fields can be added. Reminder: replace API parameters of the form pa.ram with pa_ram.
+    Additional fields will automatically be rendered by django_forms_bootstrap app"""
     venue_city = forms.CharField(required=False)
     venue_region = forms.CharField(required=False)
     venue_country = forms.CharField(required=False)
@@ -18,6 +20,7 @@ class QForm(forms.Form):
             raise forms.ValidationError("You can select between 1 and 3 categories.")
         return data
     
+    # all text validation depends on helpers.validate_names() and helpers.is_empty()
     def clean_venue_city(self):
         data = self.cleaned_data['venue_city'].strip()
         if not validate_names(data) and not is_empty(data):
